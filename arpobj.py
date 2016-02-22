@@ -220,11 +220,11 @@ class CouchCoop:
                     # This is a really old mac that we haven't seen in a while.
                     old_devices_found_doc_list.append(doc)
                     # Log appropriately
-                    logger(rightnow, entry['mac'], entry['ip'], 'OLD DEVICE DISCOVERED')
+                    logger(entry['mac'], entry['ip'], 'OLD DEVICE DISCOVERED')
                 else:
                     # This is a fairly new mac that we've seen before.
                     # Log it and move on
-                    logger(rightnow, entry['mac'], entry['ip'], 'DEVICE ACTIVE ON NETWORK')
+                    logger(entry['mac'], entry['ip'], 'DEVICE ACTIVE ON NETWORK')
 
                 # Now update the doc
                 doc['lastSeen'] = rightnow.strftime('%x %X')
@@ -233,7 +233,7 @@ class CouchCoop:
                 # Is this device on macwatch?
                 if self.macwatch.act_on_mac(doc['_id']):
                     macwatch_found_list.append(doc)
-                    logger(rightnow, doc['_id'], doc['ip'], 'DISCOVERED DEVICE ON MACWATCH')
+                    logger(doc['_id'], doc['ip'], 'DISCOVERED DEVICE ON MACWATCH')
 
                 update_doc_list.append(doc)
 
@@ -247,11 +247,11 @@ class CouchCoop:
                 # Log to macwatch if this is what we were looking for
                 if entry['mac'] in self.macwatch:
                     macwatch_found_list.append(doc)
-                    logger(rightnow, doc['_id'], doc['ip'], 'DISCOVERED PREVIOUSLY UNSEEN DEVICE ON MACWATCH')
+                    logger(doc['_id'], doc['ip'], 'DISCOVERED PREVIOUSLY UNSEEN DEVICE ON MACWATCH')
 
                 # Append to new devices list
                 new_devices_doc_list.append(doc)
-                logger(rightnow, doc['_id'], doc['ip'], 'DISCOVERED NEW DEVICE ON NETWORK')
+                logger(doc['_id'], doc['ip'], 'DISCOVERED NEW DEVICE ON NETWORK')
 
 
         # Update all the timestamps. Basically if we found you and know about
@@ -307,9 +307,9 @@ def mail_exec(body, subj, m_from, m_to):
     s.quit()
     return True
 
-def logger(date, mac, address, status):
+def logger(mac, address, status):
     """
         This function simply forms the log message
         which will be sent to syslog for processing.
     """
-    syslog.syslog("%s %s was seen with the IP of %s STATUS: %s" % (date.strftime('%x %X'), mac, address, status))
+    syslog.syslog("%s was seen with the IP of %s STATUS: %s" % (mac, address, status))
