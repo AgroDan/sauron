@@ -281,7 +281,7 @@ class CouchCoop:
         message += "\n"
 
         if len(new_devices_doc_list):
-            self.alert(alert_doc_list, message, "New Device(s) found on network")
+            self.alert(new_devices_doc_list, message, "New Device(s) found on network")
 
 
 def mail_exec(body, subj, m_from, m_to):
