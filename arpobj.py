@@ -245,7 +245,7 @@ class CouchCoop:
                 doc = self.get_doc(entry['mac'])
 
                 # Log to macwatch if this is what we were looking for
-                if entry['mac'] in self.macwatch:
+                if self.macwatch.act_on_mac(doc['_id']):
                     macwatch_found_list.append(doc)
                     logger(doc['_id'], doc['ip'], 'DISCOVERED PREVIOUSLY UNSEEN DEVICE ON MACWATCH')
 
