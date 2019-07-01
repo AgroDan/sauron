@@ -113,7 +113,7 @@ class MacWatch:
 
 class CouchCoop:
     def __init__(self, server='localhost', port=5984, database_name='sauron', ageout=30,
-                 mail_to='dan@einados.com', mail_from='root@stewie.einados.com'):
+                 mail_to='dan@example.com', mail_from='sauron@example.com'):
         """
             Initializes server connection to couchDB
         """

@@ -129,7 +129,7 @@ class CouchCoop:
             body += "\n"
 
         if len(alert_doc_list):
-            mail_exec(body, "New Device(s) found on network", "root@stewie.einados.com", "dan@einados.com")
+            mail_exec(body, "New Device(s) found on network", "sauron@example.com", "dan@example.com")
 
 
 def mail_exec(body, subj, m_from, m_to):
